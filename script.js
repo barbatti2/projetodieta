@@ -316,57 +316,61 @@ addWaterBtn.addEventListener("click", async () => {
   waterAmount.value = "";
 
 });
-addWeightBtn.addEventListener("click", async () => {
-  if (!activeProfile) {
-  alert("Selecione Gabriel ou Raissa.");
-  return;
+if (addWeightBtn) {
+  addWeightBtn.addEventListener("click", async () => {
+    if (!activeProfile) {
+      alert("Selecione Gabriel ou Raissa.");
+      return;
+    }
+
+    const newWeight = Number(weightInput.value);
+
+    await addDoc(collection(db, "entries"), {
+      profile: activeProfile,
+      type: "weight",
+      title: "Peso",
+      weight: newWeight,
+      date: today(),
+      createdAt: serverTimestamp()
+    });
+
+    await setDoc(
+      doc(db, "profiles", activeProfile),
+      {
+        currentWeight: newWeight,
+        updatedAt: serverTimestamp()
+      },
+      { merge: true }
+    );
+
+    if (currentProfile) {
+      currentProfile.currentWeight = newWeight;
+      updateProfileDashboard();
+    }
+
+    weightInput.value = "";
+  });
 }
 
-  const newWeight = Number(weightInput.value);
+if (addWorkoutBtn) {
+  addWorkoutBtn.addEventListener("click", async () => {
+    if (!activeProfile) {
+      alert("Selecione Gabriel ou Raissa.");
+      return;
+    }
 
-  await addDoc(collection(db, "entries"), {
-    profile: activeProfile,
-    type: "weight",
-    title: "Peso",
-    weight: newWeight,
-    date: today(),
-    createdAt: serverTimestamp()
-});
+    await addDoc(collection(db, "entries"), {
+      profile: activeProfile,
+      type: "workout",
+      title: workoutType.value,
+      minutes: Number(workoutMinutes.value),
+      date: today(),
+      createdAt: serverTimestamp()
+    });
 
-  await setDoc(
-  doc(db, "profiles", activeProfile),
-  {
-    currentWeight: newWeight,
-    updatedAt: serverTimestamp()
-  },
-  { merge: true }
-);
-
-  if (currentProfile) {
-    currentProfile.currentWeight = newWeight;
-    updateProfileDashboard();
-  }
-
-  weightInput.value = "";
-});
-
-addWorkoutBtn.addEventListener("click", async () => {
-  if (!activeProfile) {
-    alert("Selecione Gabriel ou Raissa.");
-    return;
-  }
-
-  await addDoc(collection(db, "entries"), {
-    profile: activeProfile,
-    type: "workout",
-    title: workoutType.value,
-    minutes: Number(workoutMinutes.value),
-    date: today(),
-    createdAt: serverTimestamp()
+    workoutMinutes.value = "";
   });
-
-  workoutMinutes.value = "";
-});
+}
 
 function listenEntries() {
   if (!activeProfile) return;
