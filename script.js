@@ -145,13 +145,10 @@ logoutBtn.addEventListener("click", () => {
   location.reload();
 });
 
-gabrielBtn.addEventListener("click", async () => {
-  activeProfile = "Gabriel";
+profileSelect.addEventListener("change", async () => {
+  activeProfile = profileSelect.value;
 
-  localStorage.setItem(
-    "activeProfile",
-    activeProfile
-  );
+  localStorage.setItem("activeProfile", activeProfile);
 
   updateProfileLabel();
 
