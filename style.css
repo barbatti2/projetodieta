@@ -582,15 +582,6 @@ button.danger {
   height: 58px;
 }
 
-.food-results {
-  position: relative;
-  z-index: 5;
-}
-
-.food-result {
-  border-radius: 18px;
-}
-
 @media (max-width: 700px) {
   .food-builder {
     padding: 14px;
