@@ -659,3 +659,77 @@ button.danger {
   font-size: 13px;
   font-weight: 700;
 }
+
+.grams-control {
+  display: grid;
+  grid-template-columns: 58px 1fr 58px;
+  gap: 8px;
+  align-items: center;
+}
+
+.grams-control button {
+  margin: 0;
+  height: 58px;
+  border-radius: 18px;
+  background: #eef6ff !important;
+  color: #0f62fe !important;
+  box-shadow: none !important;
+  font-size: 24px;
+}
+
+.grams-control input {
+  height: 58px;
+  margin: 0;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.quick-grams {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.quick-grams button {
+  margin: 0;
+  padding: 12px;
+  border-radius: 14px;
+  background: white !important;
+  color: #0f172a !important;
+  border: 1px solid #dbeafe;
+  box-shadow: none !important;
+  font-weight: 800;
+}
+
+.meal-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.meal-btn {
+  min-height: 64px;
+  margin: 0;
+  padding: 10px;
+  border-radius: 16px;
+  background: white !important;
+  color: #0f172a !important;
+  border: 1px solid #dbeafe;
+  box-shadow: none !important;
+  font-size: 13px;
+}
+
+.meal-btn.active {
+  background: linear-gradient(135deg, #0f62fe, #38bdf8) !important;
+  color: white !important;
+  border: none;
+}
+
+#addToMealBtn,
+#saveMealBtn {
+  background: linear-gradient(135deg, #0f62fe, #38bdf8) !important;
+  color: white !important;
+  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.22) !important;
+}
