@@ -416,7 +416,9 @@ function render(entries) {
     currentWeight.textContent = `${currentProfile.currentWeight} kg`;
   }
 
-  historyList.innerHTML = "";
+  if (!historyList) return;
+
+    historyList.innerHTML = "";
 
   entries.forEach((item) => {
     const div = document.createElement("div");
