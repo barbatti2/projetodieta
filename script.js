@@ -232,12 +232,16 @@ saveProfileBtn.addEventListener("click", async () => {
     updatedAt: serverTimestamp()
   };
 
-  await setDoc(doc(db, "users", currentUser.uid), profileData, { merge: true });
+  await setDoc(
+  doc(db, "profiles", activeProfile),
+  profileData,
+  { merge: true }
+);
 
-  currentProfile = profileData;
-  updateProfileDashboard();
+currentProfile = profileData;
+updateProfileDashboard();
 
-  alert("Perfil salvo com sucesso!");
+alert("Perfil salvo com sucesso!");
 });
 
 function updateProfileDashboard() {
