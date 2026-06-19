@@ -73,6 +73,12 @@ const tmbText = document.getElementById("tmbText");
 const historyList = document.getElementById("historyList");
 const navButtons = document.querySelectorAll(".nav-btn[data-screen]");
 const screens = document.querySelectorAll(".screen");
+const sidebar = document.querySelector(".sidebar");
+const toggleMenuBtn = document.getElementById("toggleMenuBtn");
+
+toggleMenuBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("expanded");
+});
 
 navButtons.forEach((button) => {
   button.addEventListener("click", () => {
