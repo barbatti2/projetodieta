@@ -300,19 +300,22 @@ addFoodBtn.addEventListener("click", async () => {
 
 addWaterBtn.addEventListener("click", async () => {
   if (!activeProfile) {
-  alert("Selecione Gabriel ou Raissa.");
-  return;
-}
+    alert("Selecione Gabriel ou Raissa.");
+    return;
+  }
 
-await addDoc(collection(db, "entries"), {
-  profile: activeProfile,
-  type: "water",
-  title: "Água",
-  amount: Number(waterAmount.value),
-  date: today(),
-  createdAt: serverTimestamp()
+  await addDoc(collection(db, "entries"), {
+    profile: activeProfile,
+    type: "water",
+    title: "Água",
+    amount: Number(waterAmount.value),
+    date: today(),
+    createdAt: serverTimestamp()
+  });
+
+  waterAmount.value = "";
+
 });
-
 addWeightBtn.addEventListener("click", async () => {
   if (!activeProfile) {
   alert("Selecione Gabriel ou Raissa.");
