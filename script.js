@@ -178,8 +178,21 @@ profileSelect.addEventListener("change", async () => {
 
 
 function updateProfileLabel() {
-  activeProfileText.textContent =
-    activeProfile || "Nenhum";
+  if (activeProfileText) {
+    activeProfileText.textContent = activeProfile || "Nenhum";
+  }
+
+  if (profileSelect) {
+    profileSelect.value = activeProfile || "";
+  }
+
+  document.querySelectorAll(".currentProfileLabel").forEach((item) => {
+    item.textContent = activeProfile || "Nenhum";
+  });
+
+  document.querySelectorAll(".currentDateLabel").forEach((item) => {
+    item.textContent = new Date().toLocaleDateString("pt-BR");
+  });
 }
 
 updateProfileLabel();
