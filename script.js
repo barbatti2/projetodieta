@@ -137,7 +137,7 @@ enterAppBtn.addEventListener("click", () => {
   appArea.classList.remove("hidden");
 });
 
-logoutBtn.addEventListener(() => {
+logoutBtn.addEventListener("click", () => {
   localStorage.removeItem(
     "projectDietLogged"
   );
