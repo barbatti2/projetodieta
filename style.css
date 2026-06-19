@@ -312,3 +312,67 @@ button.danger {
     padding: 14px;
   }
 }
+
+.page-header {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.page-icon {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 12px;
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  color: white;
+  font-size: 26px;
+  background: linear-gradient(135deg, #0f62fe, #38bdf8);
+  box-shadow: 0 16px 35px rgba(37, 99, 235, 0.25);
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.page-header p {
+  margin: 6px 0 0;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.profile-context {
+  margin-bottom: 24px;
+  padding: 22px;
+  border-radius: 28px;
+  text-align: center;
+  background: linear-gradient(135deg, #eef6ff, #ffffff);
+  border: 1px solid #bfdbfe;
+  box-shadow: 0 14px 35px rgba(37, 99, 235, 0.08);
+}
+
+.profile-context span {
+  display: block;
+  font-size: 12px;
+  font-weight: 900;
+  color: #64748b;
+  letter-spacing: 1.5px;
+}
+
+.profile-context strong {
+  display: block;
+  margin-top: 3px;
+  font-size: 30px;
+  font-weight: 900;
+  color: #0f62fe;
+}
+
+.profile-context small {
+  display: block;
+  margin-top: 4px;
+  color: #475569;
+  font-weight: 700;
+}
