@@ -780,3 +780,43 @@ button.danger {
     grid-template-columns: repeat(2, 1fr) !important;
   }
 }
+
+.meal-macros {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+.meal-macros div {
+  min-width: 0;
+  background: #f6faff !important;
+  padding: 14px 8px !important;
+  border-radius: 18px !important;
+  text-align: center !important;
+}
+
+.meal-macros span,
+.meal-macros strong {
+  display: block !important;
+  width: 100% !important;
+}
+
+.meal-macros span {
+  font-size: 10px !important;
+  font-weight: 500 !important;
+  color: #64748b !important;
+}
+
+.meal-macros strong {
+  margin-top: 5px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+}
+
+@media (max-width: 700px) {
+  .meal-macros {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
