@@ -641,9 +641,8 @@ button.danger {
 }
 
 .food-result strong {
-  display: block;
   font-size: 15px;
-  font-weight: 900;
+  font-weight: 500;
 }
 
 .food-result small {
