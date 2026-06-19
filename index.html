@@ -143,7 +143,7 @@
   <div class="page-header">
     <div class="page-icon">🍎</div>
     <h2>Adicionar alimento</h2>
-    <p>Monte sua refeição e acompanhe seus macros.</p>
+    <p>Monte sua refeição e salve tudo junto.</p>
   </div>
 
   <div class="profile-context">
@@ -151,7 +151,57 @@
     <strong class="currentProfileLabel">Nenhum</strong>
     <small class="currentDateLabel"></small>
   </div>
-    </section>
+
+  <div class="card page-card food-builder">
+
+    <label>Pesquisar alimento</label>
+    <input id="foodSearch" type="text" placeholder="Digite banana, frango, arroz..." />
+
+    <div id="foodResults" class="food-results"></div>
+
+    <label>Quantidade</label>
+
+    <div class="grams-control">
+      <button id="minusGramsBtn" type="button">−</button>
+      <input id="gramsInput" type="number" value="100" />
+      <button id="plusGramsBtn" type="button">+</button>
+    </div>
+
+    <div class="quick-grams">
+      <button type="button" data-grams="50">50g</button>
+      <button type="button" data-grams="100">100g</button>
+      <button type="button" data-grams="150">150g</button>
+      <button type="button" data-grams="200">200g</button>
+    </div>
+
+    <label>Refeição</label>
+
+    <div class="meal-options">
+      <button type="button" class="meal-btn active" data-meal="Café da manhã">☀️ Café da manhã</button>
+      <button type="button" class="meal-btn" data-meal="Almoço">🍛 Almoço</button>
+      <button type="button" class="meal-btn" data-meal="Café da tarde">☕ Café da tarde</button>
+      <button type="button" class="meal-btn" data-meal="Jantar">🌙 Jantar</button>
+    </div>
+
+    <button id="addToMealBtn" type="button">+ Adicionar na lista</button>
+
+    <div class="meal-preview">
+      <h3>Alimentos selecionados</h3>
+      <div id="selectedFoodsList"></div>
+
+      <div class="macro-summary">
+        <div><span>Total</span><strong id="mealCalories">0 kcal</strong></div>
+        <div><span>Proteína</span><strong id="mealProtein">0g</strong></div>
+        <div><span>Carboidratos</span><strong id="mealCarbs">0g</strong></div>
+        <div><span>Gorduras</span><strong id="mealFat">0g</strong></div>
+      </div>
+
+      <button id="saveMealBtn" type="button">Salvar refeição completa</button>
+    </div>
+
+  </div>
+
+</section>
 
     <section id="screen-meals" class="screen">
 
