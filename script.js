@@ -298,29 +298,6 @@ function updateProfileDashboard() {
     : "-- kg";
 }
 
-addFoodBtn.addEventListener("click", async () => {
-  if (!activeProfile) {
-    alert("Selecione Gabriel ou Raissa.");
-    return;
-  }
-
-  if (!foodName.value || !foodCalories.value) {
-    alert("Informe alimento e calorias.");
-    return;
-  }
-
- await addDoc(collection(db, "entries"), {
-  profile: activeProfile,
-  type: "food",
-  title: foodName.value,
-  calories: Number(foodCalories.value),
-  date: today(),
-  createdAt: serverTimestamp()
-});
-  foodName.value = "";
-  foodCalories.value = "";
-});
-
 addWaterBtn.addEventListener("click", async () => {
   if (!activeProfile) {
     alert("Selecione Gabriel ou Raissa.");
