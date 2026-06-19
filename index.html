@@ -9,26 +9,35 @@
 <body>
 
   <main id="authArea" class="auth">
-    <div class="card auth-card">
-      <div class="logo">
-        <div class="logo-icon">PD</div>
-        <div>
-          <h1>Projeto Dieta</h1>
-          <p>Foco • Treino • Resultados</p>
-        </div>
+  <div class="card auth-card">
+
+    <div class="logo">
+      <div class="logo-icon">PD</div>
+      <div>
+        <h1>Projeto Dieta</h1>
+        <p>Foco • Treino • Resultados</p>
       </div>
-
-      <h2 id="authTitle">Entrar</h2>
-
-      <input id="nameInput" class="hidden" type="text" placeholder="Nome completo" />
-      <input id="emailInput" type="email" placeholder="E-mail" />
-      <input id="passwordInput" type="password" placeholder="Senha" />
-
-      <button id="loginBtn">Entrar</button>
-      <button id="registerBtn" class="secondary">Criar conta</button>
-      <button id="resetBtn" class="link">Esqueci minha senha</button>
     </div>
-  </main>
+
+    <h2>Entrar</h2>
+
+    <input
+      id="appPassword"
+      type="password"
+      placeholder="Digite a senha"
+    />
+
+    <label style="display:flex;gap:10px;margin-top:10px;">
+      <input id="rememberMe" type="checkbox" checked />
+      Permanecer conectado
+    </label>
+
+    <button id="enterAppBtn">
+      Entrar
+    </button>
+
+  </div>
+</main>
 
   <main id="appArea" class="hidden">
     <header class="topbar">
@@ -42,6 +51,18 @@
 
       <button id="logoutBtn" class="danger">Sair</button>
     </header>
+    <section class="card" id="profileSelector">
+    <h3>Quem está usando?</h3>
+
+    <button id="gabrielBtn">👨 Gabriel</button>
+
+    <button id="raissaBtn">👩 Raissa</button>
+
+    <p>
+      Perfil ativo:
+      <strong id="activeProfile">Nenhum</strong>
+    </p>
+  </section>
 
     <section class="dashboard">
       <div class="hero">
