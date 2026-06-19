@@ -71,6 +71,28 @@ const goalWeightText = document.getElementById("goalWeightText");
 const tmbText = document.getElementById("tmbText");
 
 const historyList = document.getElementById("historyList");
+const navButtons = document.querySelectorAll(".nav-btn[data-screen]");
+const screens = document.querySelectorAll(".screen");
+
+navButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const screenName = button.dataset.screen;
+
+    screens.forEach((screen) => {
+      screen.classList.remove("active");
+    });
+
+    navButtons.forEach((btn) => {
+      btn.classList.remove("active");
+    });
+
+    document
+      .getElementById(`screen-${screenName}`)
+      .classList.add("active");
+
+    button.classList.add("active");
+  });
+});
 
 let currentProfile = null;
 
