@@ -75,6 +75,223 @@ const navButtons = document.querySelectorAll(".nav-btn[data-screen]");
 const screens = document.querySelectorAll(".screen");
 const sidebar = document.querySelector(".sidebar");
 const toggleMenuBtn = document.getElementById("toggleMenuBtn");
+const foodSearch = document.getElementById("foodSearch");
+const foodResults = document.getElementById("foodResults");
+const gramsInput = document.getElementById("gramsInput");
+const minusGramsBtn = document.getElementById("minusGramsBtn");
+const plusGramsBtn = document.getElementById("plusGramsBtn");
+const addToMealBtn = document.getElementById("addToMealBtn");
+const saveMealBtn = document.getElementById("saveMealBtn");
+const selectedFoodsList = document.getElementById("selectedFoodsList");
+
+const mealCalories = document.getElementById("mealCalories");
+const mealProtein = document.getElementById("mealProtein");
+const mealCarbs = document.getElementById("mealCarbs");
+const mealFat = document.getElementById("mealFat");
+
+let selectedFood = null;
+let selectedMeal = "Café da manhã";
+let mealItems = [];
+
+const foodDatabase = [
+  { name: "Ovo cozido", calories: 155, protein: 13, carbs: 1.1, fat: 11 },
+  { name: "Peito de frango grelhado", calories: 165, protein: 31, carbs: 0, fat: 3.6 },
+  { name: "Arroz branco cozido", calories: 128, protein: 2.5, carbs: 28, fat: 0.2 },
+  { name: "Feijão carioca cozido", calories: 76, protein: 4.8, carbs: 13.6, fat: 0.5 },
+  { name: "Banana", calories: 89, protein: 1.1, carbs: 23, fat: 0.3 },
+  { name: "Maçã", calories: 52, protein: 0.3, carbs: 14, fat: 0.2 },
+  { name: "Batata doce cozida", calories: 86, protein: 1.6, carbs: 20, fat: 0.1 },
+  { name: "Leite integral", calories: 61, protein: 3.2, carbs: 4.7, fat: 3.3 },
+  { name: "Pão integral", calories: 247, protein: 13, carbs: 41, fat: 4.2 },
+  { name: "Iogurte natural", calories: 61, protein: 3.5, carbs: 4.7, fat: 3.3 },
+  { name: "Queijo minas", calories: 264, protein: 17, carbs: 3.2, fat: 20 },
+  { name: "Aveia", calories: 389, protein: 16.9, carbs: 66.3, fat: 6.9 },
+  { name: "Carne bovina magra", calories: 250, protein: 26, carbs: 0, fat: 15 },
+  { name: "Tilápia grelhada", calories: 128, protein: 26, carbs: 0, fat: 2.7 },
+  { name: "Salmão", calories: 208, protein: 20, carbs: 0, fat: 13 }
+];
+
+function calculateFood(food, grams) {
+  const factor = grams / 100;
+
+  return {
+    name: food.name,
+    grams,
+    calories: Math.round(food.calories * factor),
+    protein: Number((food.protein * factor).toFixed(1)),
+    carbs: Number((food.carbs * factor).toFixed(1)),
+    fat: Number((food.fat * factor).toFixed(1))
+  };
+}
+
+if (foodSearch) {
+  foodSearch.addEventListener("input", () => {
+    const term = foodSearch.value.toLowerCase();
+    foodResults.innerHTML = "";
+
+    if (!term) return;
+
+    foodDatabase
+      .filter((food) => food.name.toLowerCase().includes(term))
+      .slice(0, 10)
+      .forEach((food) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "food-result";
+        button.innerHTML = `
+          <strong>${food.name}</strong>
+          <small>${food.calories} kcal / 100g</small>
+        `;
+
+        button.addEventListener("click", () => {
+          selectedFood = food;
+          foodSearch.value = food.name;
+          foodResults.innerHTML = "";
+        });
+
+        foodResults.appendChild(button);
+      });
+  });
+}
+
+if (minusGramsBtn) {
+  minusGramsBtn.addEventListener("click", () => {
+    gramsInput.value = Math.max(Number(gramsInput.value) - 10, 10);
+  });
+}
+
+if (plusGramsBtn) {
+  plusGramsBtn.addEventListener("click", () => {
+    gramsInput.value = Number(gramsInput.value) + 10;
+  });
+}
+
+document.querySelectorAll(".quick-grams button").forEach((button) => {
+  button.addEventListener("click", () => {
+    gramsInput.value = button.dataset.grams;
+  });
+});
+
+document.querySelectorAll(".meal-btn").forEach((button) => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".meal-btn").forEach((btn) => {
+      btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+    selectedMeal = button.dataset.meal;
+  });
+});
+
+if (addToMealBtn) {
+  addToMealBtn.addEventListener("click", () => {
+    if (!selectedFood) {
+      alert("Selecione um alimento.");
+      return;
+    }
+
+    const calculated = calculateFood(selectedFood, Number(gramsInput.value || 100));
+    mealItems.push(calculated);
+
+    selectedFood = null;
+    foodSearch.value = "";
+    gramsInput.value = 100;
+
+    renderMealItems();
+  });
+}
+
+function renderMealItems() {
+  if (!selectedFoodsList) return;
+
+  selectedFoodsList.innerHTML = "";
+
+  if (mealItems.length === 0) {
+    selectedFoodsList.innerHTML = `<p class="empty-list">Nenhum alimento adicionado.</p>`;
+  }
+
+  mealItems.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.className = "selected-food-item";
+
+    div.innerHTML = `
+      <div>
+        <strong>${item.name}</strong>
+        <small>${item.grams}g • ${item.calories} kcal • ${item.protein}g proteína</small>
+      </div>
+      <button type="button" data-index="${index}">Excluir</button>
+    `;
+
+    div.querySelector("button").addEventListener("click", () => {
+      mealItems.splice(index, 1);
+      renderMealItems();
+    });
+
+    selectedFoodsList.appendChild(div);
+  });
+
+  const totals = mealItems.reduce(
+    (acc, item) => {
+      acc.calories += item.calories;
+      acc.protein += item.protein;
+      acc.carbs += item.carbs;
+      acc.fat += item.fat;
+      return acc;
+    },
+    { calories: 0, protein: 0, carbs: 0, fat: 0 }
+  );
+
+  if (mealCalories) mealCalories.textContent = `${Math.round(totals.calories)} kcal`;
+  if (mealProtein) mealProtein.textContent = `${totals.protein.toFixed(1)}g`;
+  if (mealCarbs) mealCarbs.textContent = `${totals.carbs.toFixed(1)}g`;
+  if (mealFat) mealFat.textContent = `${totals.fat.toFixed(1)}g`;
+}
+
+async function saveMeal() {
+  if (!activeProfile) {
+    alert("Selecione Gabriel ou Raissa.");
+    return;
+  }
+
+  if (mealItems.length === 0) {
+    alert("Adicione pelo menos um alimento.");
+    return;
+  }
+
+  const totals = mealItems.reduce(
+    (acc, item) => {
+      acc.calories += item.calories;
+      acc.protein += item.protein;
+      acc.carbs += item.carbs;
+      acc.fat += item.fat;
+      return acc;
+    },
+    { calories: 0, protein: 0, carbs: 0, fat: 0 }
+  );
+
+  await addDoc(collection(db, "entries"), {
+    profile: activeProfile,
+    type: "meal",
+    meal: selectedMeal,
+    items: mealItems,
+    calories: Math.round(totals.calories),
+    protein: Number(totals.protein.toFixed(1)),
+    carbs: Number(totals.carbs.toFixed(1)),
+    fat: Number(totals.fat.toFixed(1)),
+    date: today(),
+    createdAt: serverTimestamp()
+  });
+
+  mealItems = [];
+  renderMealItems();
+  alert("Refeição salva com sucesso!");
+}
+
+if (saveMealBtn) {
+  saveMealBtn.addEventListener("click", saveMeal);
+}
+
+renderMealItems();
 
 toggleMenuBtn.addEventListener("click", () => {
   sidebar.classList.toggle("expanded");
