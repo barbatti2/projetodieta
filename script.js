@@ -175,24 +175,16 @@ function updateProfileLabel() {
 }
 
 updateProfileLabel();
-  currentUser = user;
 
-  if (user) {
-    authArea.classList.add("hidden");
-    appArea.classList.remove("hidden");
-
-    await loadProfile();
-    listenEntries();
-  } else {
-    authArea.classList.remove("hidden");
-    appArea.classList.add("hidden");
-  }
-});
+if (savedLogin === "true") {
+  loadProfile();
+  listenEntries();
+}
 
 async function loadProfile() {
-  if (!currentUser) return;
+  if (!activeProfile) return;
 
-  const ref = doc(db, "users", currentUser.uid);
+  const ref = doc(db, "profiles", activeProfile);
   const snap = await getDoc(ref);
 
   if (!snap.exists()) return;
