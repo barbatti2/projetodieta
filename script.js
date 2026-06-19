@@ -1,12 +1,7 @@
 import { auth, db } from "./firebase.js";
 
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  signOut,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+// Login local do Projeto Dieta
+const APP_PASSWORD = "batata";
 
 import {
   collection,
