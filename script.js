@@ -44,6 +44,18 @@ const waterAmount = document.getElementById("waterAmount");
 const weightInput = document.getElementById("weightInput");
 const workoutType = document.getElementById("workoutType");
 const workoutMinutes = document.getElementById("workoutMinutes");
+const appPassword = document.getElementById("appPassword");
+const enterAppBtn = document.getElementById("enterAppBtn");
+const rememberMe = document.getElementById("rememberMe");
+
+const gabrielBtn = document.getElementById("gabrielBtn");
+const raissaBtn = document.getElementById("raissaBtn");
+
+const activeProfileText =
+  document.getElementById("activeProfile");
+
+let activeProfile =
+  localStorage.getItem("activeProfile") || "";
 
 const addFoodBtn = document.getElementById("addFoodBtn");
 const addWaterBtn = document.getElementById("addWaterBtn");
