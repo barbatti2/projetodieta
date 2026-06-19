@@ -112,65 +112,69 @@ function calculateFatLossCalories(dailyCalories) {
   return Math.max(dailyCalories - 500, 1200);
 }
 
-registerBtn.addEventListener("click", async () => {
-  if (!isRegisterMode) {
-    isRegisterMode = true;
-    nameInput.classList.remove("hidden");
-    registerBtn.textContent = "Finalizar cadastro";
+const savedLogin =
+  localStorage.getItem("projectDietLogged");
+
+if (savedLogin === "true") {
+  authArea.classList.add("hidden");
+  appArea.classList.remove("hidden");
+}
+
+enterAppBtn.addEventListener("click", () => {
+  const password = appPassword.value;
+
+  if (password !== APP_PASSWORD) {
+    alert("Senha incorreta");
     return;
   }
 
-  const name = nameInput.value.trim();
-  const email = emailInput.value.trim();
-  const password = passwordInput.value.trim();
-
-  if (!name || !email || !password) {
-    alert("Preencha nome, e-mail e senha.");
-    return;
+  if (rememberMe.checked) {
+    localStorage.setItem(
+      "projectDietLogged",
+      "true"
+    );
   }
 
-  const credential = await createUserWithEmailAndPassword(auth, email, password);
-
-  await setDoc(doc(db, "users", credential.user.uid), {
-    name,
-    email,
-    sex: "masculino",
-    age: "",
-    height: "",
-    currentWeight: "",
-    goalWeight: "",
-    activityLevel: "moderado",
-    waterGoal: 2500,
-    tmb: 0,
-    dailyCalories: 0,
-    fatLossCalories: 0,
-    createdAt: serverTimestamp()
-  });
+  authArea.classList.add("hidden");
+  appArea.classList.remove("hidden");
 });
 
-loginBtn.addEventListener("click", async () => {
-  await signInWithEmailAndPassword(
-    auth,
-    emailInput.value.trim(),
-    passwordInput.value.trim()
+logoutBtn.addEventListener(() => {
+  localStorage.removeItem(
+    "projectDietLogged"
   );
+
+  location.reload();
 });
 
-resetBtn.addEventListener("click", async () => {
-  if (!emailInput.value) {
-    alert("Digite seu e-mail primeiro.");
-    return;
-  }
+gabrielBtn.addEventListener("click", () => {
+  activeProfile = "Gabriel";
 
-  await sendPasswordResetEmail(auth, emailInput.value);
-  alert("Link de recuperação enviado.");
+  localStorage.setItem(
+    "activeProfile",
+    activeProfile
+  );
+
+  updateProfileLabel();
 });
 
-logoutBtn.addEventListener("click", async () => {
-  await signOut(auth);
+raissaBtn.addEventListener("click", () => {
+  activeProfile = "Raissa";
+
+  localStorage.setItem(
+    "activeProfile",
+    activeProfile
+  );
+
+  updateProfileLabel();
 });
 
-onAuthStateChanged(auth, async (user) => {
+function updateProfileLabel() {
+  activeProfileText.textContent =
+    activeProfile || "Nenhum";
+}
+
+updateProfileLabel();
   currentUser = user;
 
   if (user) {
