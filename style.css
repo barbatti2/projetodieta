@@ -310,7 +310,7 @@ button.danger {
     padding: 14px 8px;
     overflow-y: auto;
     background: linear-gradient(180deg, #eef6ff, #ffffff, #fff1f2);
-    transition: width 0.25s ease;
+    transition: width 0.12s ease;
   }
 
   .sidebar.expanded {
