@@ -614,3 +614,58 @@ button.danger {
     grid-column: 1 / -1;
   }
 }
+
+.food-results {
+  margin-top: 10px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: white;
+  border: 1px solid #dbeafe;
+  box-shadow: 0 16px 35px rgba(15, 23, 42, 0.08);
+}
+
+.food-result {
+  width: 100%;
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: 0;
+  background: white !important;
+  color: #0f172a !important;
+  box-shadow: none !important;
+  border: none;
+  border-bottom: 1px solid #e5edf8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+.food-result:last-child {
+  border-bottom: none;
+}
+
+.food-result:hover {
+  transform: none;
+  background: #f8fbff !important;
+}
+
+.food-result strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.food-result small {
+  display: block;
+  margin-top: 3px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.food-result::after {
+  content: "Selecionar";
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 700;
+}
