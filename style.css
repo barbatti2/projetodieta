@@ -493,50 +493,124 @@ button.danger {
   font-weight: 700;
 }
 
-.meal-day-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-
-.meal-card {
-  background: white;
-  border-radius: 24px;
+.food-builder {
+  max-width: 760px;
+  margin: 0 auto;
   padding: 18px;
+}
+
+.food-builder > label {
+  margin-left: 8px;
+}
+
+.meal-preview {
+  background: white;
   border: 1px solid #dbeafe;
-  box-shadow: 0 12px 25px rgba(15, 23, 42, 0.05);
+  border-radius: 26px;
+  padding: 18px;
+  margin-top: 18px;
 }
 
-.meal-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
+.meal-preview::before {
+  content: "PRÉVIA DA REFEIÇÃO";
+  display: block;
+  color: #0f62fe;
+  font-size: 11px;
+  font-weight: 900;
+  margin-bottom: 2px;
 }
 
-.meal-header span {
+.meal-preview h3 {
+  margin: 0 0 18px;
   font-size: 24px;
+  font-weight: 900;
 }
 
-.meal-header h3 {
-  margin: 0;
+.selected-food-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid #e5edf8;
 }
 
-.meal-list {
-  min-height: 120px;
+.selected-food-item strong {
+  font-size: 16px;
+  font-weight: 900;
 }
 
-.empty-meal {
+.selected-food-item small {
   color: #64748b;
-  text-align: center;
+  font-weight: 600;
 }
 
-.meal-total-card {
-  margin-top: 20px;
+.selected-food-item button {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 50%;
+  background: #ff5a2f;
+  color: white;
+  font-size: 0;
 }
 
-@media (max-width: 900px) {
-  .meal-day-grid {
-    grid-template-columns: 1fr;
+.selected-food-item button::before {
+  content: "×";
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.macro-summary {
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 16px;
+}
+
+.macro-summary div {
+  background: #f6faff;
+  border-radius: 18px;
+}
+
+#saveMealBtn {
+  margin-top: 14px;
+  height: 58px;
+  font-size: 17px;
+}
+
+.grams-control input {
+  margin: 0;
+  height: 58px;
+}
+
+.food-results {
+  position: relative;
+  z-index: 5;
+}
+
+.food-result {
+  border-radius: 18px;
+}
+
+@media (max-width: 700px) {
+  .food-builder {
+    padding: 14px;
+  }
+
+  .meal-options {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .meal-btn {
+    min-height: 70px;
+    padding: 10px 6px;
+    font-size: 11px;
+  }
+
+  .macro-summary {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .macro-summary div:nth-child(4) {
+    grid-column: 1 / -1;
   }
 }
