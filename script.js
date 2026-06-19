@@ -74,9 +74,7 @@ const tmbText = document.getElementById("tmbText");
 
 const historyList = document.getElementById("historyList");
 
-let currentUser = null;
 let currentProfile = null;
-let isRegisterMode = false;
 
 function today() {
   return new Date().toISOString().slice(0, 10);
@@ -147,7 +145,7 @@ logoutBtn.addEventListener(() => {
   location.reload();
 });
 
-gabrielBtn.addEventListener("click", () => {
+gabrielBtn.addEventListener("click", async () => {
   activeProfile = "Gabriel";
 
   localStorage.setItem(
@@ -156,9 +154,12 @@ gabrielBtn.addEventListener("click", () => {
   );
 
   updateProfileLabel();
+
+  await loadProfile();
+  listenEntries();
 });
 
-raissaBtn.addEventListener("click", () => {
+raissaBtn.addEventListener("click", async () => {
   activeProfile = "Raissa";
 
   localStorage.setItem(
@@ -167,6 +168,9 @@ raissaBtn.addEventListener("click", () => {
   );
 
   updateProfileLabel();
+
+  await loadProfile();
+  listenEntries();
 });
 
 function updateProfileLabel() {
@@ -204,7 +208,10 @@ async function loadProfile() {
 }
 
 saveProfileBtn.addEventListener("click", async () => {
-  if (!currentUser) return;
+  if (!activeProfile) {
+  alert("Selecione Gabriel ou Raissa.");
+  return;
+}
 
   const sex = profileSex.value;
   const age = Number(profileAge.value);
@@ -217,20 +224,20 @@ saveProfileBtn.addEventListener("click", async () => {
   const fatLossCalories = calculateFatLossCalories(dailyCalories);
 
   const profileData = {
-    name: profileName.value.trim(),
-    email: currentUser.email,
-    sex,
-    age,
-    height,
-    currentWeight: weight,
-    goalWeight: Number(profileGoalWeight.value),
-    activityLevel: level,
-    waterGoal: Number(waterGoalInput.value),
-    tmb: Math.round(tmb),
-    dailyCalories: Math.round(dailyCalories),
-    fatLossCalories: Math.round(fatLossCalories),
-    updatedAt: serverTimestamp()
-  };
+   profile: activeProfile,
+   name: profileName.value.trim(),
+   sex,
+   age,
+   height,
+   currentWeight: weight,
+   goalWeight: Number(profileGoalWeight.value),
+   activityLevel: level,
+   waterGoal: Number(waterGoalInput.value),
+   tmb: Math.round(tmb),
+   dailyCalories: Math.round(dailyCalories),
+   fatLossCalories: Math.round(fatLossCalories),
+   updatedAt: serverTimestamp()
+};
 
   await setDoc(
   doc(db, "profiles", activeProfile),
@@ -269,61 +276,68 @@ function updateProfileDashboard() {
 }
 
 addFoodBtn.addEventListener("click", async () => {
-  if (!currentUser) return;
+  if (!activeProfile) {
+    alert("Selecione Gabriel ou Raissa.");
+    return;
+  }
 
   if (!foodName.value || !foodCalories.value) {
     alert("Informe alimento e calorias.");
     return;
   }
 
-  await addDoc(collection(db, "entries"), {
-    userId: currentUser.uid,
-    type: "food",
-    title: foodName.value,
-    calories: Number(foodCalories.value),
-    date: today(),
-    createdAt: serverTimestamp()
-  });
-
+ await addDoc(collection(db, "entries"), {
+  profile: activeProfile,
+  type: "food",
+  title: foodName.value,
+  calories: Number(foodCalories.value),
+  date: today(),
+  createdAt: serverTimestamp()
+});
   foodName.value = "";
   foodCalories.value = "";
 });
 
 addWaterBtn.addEventListener("click", async () => {
-  if (!currentUser) return;
+  if (!activeProfile) {
+  alert("Selecione Gabriel ou Raissa.");
+  return;
+}
 
-  await addDoc(collection(db, "entries"), {
-    userId: currentUser.uid,
-    type: "water",
-    title: "Água",
-    amount: Number(waterAmount.value),
-    date: today(),
-    createdAt: serverTimestamp()
-  });
+await addDoc(collection(db, "entries"), {
+  profile: activeProfile,
+  type: "water",
+  title: "Água",
+  amount: Number(waterAmount.value),
+  date: today(),
+  createdAt: serverTimestamp()
 });
 
 addWeightBtn.addEventListener("click", async () => {
-  if (!currentUser) return;
+  if (!activeProfile) {
+  alert("Selecione Gabriel ou Raissa.");
+  return;
+}
 
   const newWeight = Number(weightInput.value);
 
   await addDoc(collection(db, "entries"), {
-    userId: currentUser.uid,
+    profile: activeProfile,
     type: "weight",
     title: "Peso",
     weight: newWeight,
     date: today(),
     createdAt: serverTimestamp()
-  });
+});
 
   await setDoc(
-    doc(db, "users", currentUser.uid),
-    {
-      currentWeight: newWeight,
-      updatedAt: serverTimestamp()
-    },
-    { merge: true }
-  );
+  doc(db, "profiles", activeProfile),
+  {
+    currentWeight: newWeight,
+    updatedAt: serverTimestamp()
+  },
+  { merge: true }
+);
 
   if (currentProfile) {
     currentProfile.currentWeight = newWeight;
@@ -334,10 +348,13 @@ addWeightBtn.addEventListener("click", async () => {
 });
 
 addWorkoutBtn.addEventListener("click", async () => {
-  if (!currentUser) return;
+  if (!activeProfile) {
+    alert("Selecione Gabriel ou Raissa.");
+    return;
+  }
 
   await addDoc(collection(db, "entries"), {
-    userId: currentUser.uid,
+    profile: activeProfile,
     type: "workout",
     title: workoutType.value,
     minutes: Number(workoutMinutes.value),
@@ -349,9 +366,11 @@ addWorkoutBtn.addEventListener("click", async () => {
 });
 
 function listenEntries() {
+  if (!activeProfile) return;
+
   const q = query(
     collection(db, "entries"),
-    where("userId", "==", currentUser.uid),
+    where("profile", "==", activeProfile),
     orderBy("createdAt", "desc")
   );
 
