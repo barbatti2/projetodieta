@@ -39,106 +39,128 @@
   </div>
 </main>
 
-  <main id="appArea" class="hidden">
-    <header class="topbar">
-      <div class="logo">
-        <div class="logo-icon">PD</div>
-        <div>
-          <h1>Projeto Dieta</h1>
-          <p>Foco • Treino • Resultados</p>
+  <main id="appArea" class="hidden app-shell">
+
+  <aside class="sidebar">
+    <button class="menu-title">☰ Menu</button>
+
+    <div class="app-logo">
+      <div class="logo-icon big">PD</div>
+    </div>
+
+    <p class="menu-section">GERAL</p>
+    <button class="nav-btn active" data-screen="home">🏠 Início</button>
+    <button class="nav-btn" data-screen="people">👤 Pessoas</button>
+    <button class="nav-btn primary" data-screen="add-food">＋ Adicionar alimento</button>
+
+    <p class="menu-section">ACOMPANHAMENTO</p>
+    <button class="nav-btn" data-screen="meals">🍽️ Refeições do dia</button>
+    <button class="nav-btn" data-screen="calendar">📅 Calendário</button>
+    <button class="nav-btn" data-screen="history">📈 Histórico</button>
+    <button class="nav-btn" data-screen="weight">⚖️ Peso e medidas</button>
+
+    <p class="menu-section">CONTA</p>
+    <button class="nav-btn" data-screen="settings">⚙️ Configurações</button>
+    <button id="logoutBtn" class="nav-btn logout">↪ Sair</button>
+  </aside>
+
+  <section class="main-content">
+
+    <section id="screen-home" class="screen active">
+      <div class="hero">
+        <h2>Seu controle fitness diário</h2>
+        <p>Registre alimentação, água, peso e treinos em um só lugar.</p>
+      </div>
+
+      <div class="calorie-ring-card">
+        <div class="calorie-ring" id="calorieRing">
+          <div class="ring-inner">
+            <span>Calorias</span>
+            <strong id="ringCalories">0</strong>
+            <small id="ringGoal">meta -- kcal</small>
+          </div>
+        </div>
+
+        <div class="ring-info">
+          <h3>Resumo do dia</h3>
+          <p id="calorieStatus">Defina seu perfil para calcular sua meta.</p>
         </div>
       </div>
 
-      <button id="logoutBtn" class="danger">Sair</button>
-    </header>
-    <section class="profile-bar">
-  <div>
-    <span class="mini-label">Perfil ativo</span>
-    <strong id="activeProfile">Nenhum</strong>
-  </div>
-
-  <select id="profileSelect">
-    <option value="">Escolher perfil</option>
-    <option value="Gabriel">Gabriel</option>
-    <option value="Raissa">Raissa</option>
-  </select>
-</section>
-
-<section class="dashboard">
-
-  <div class="hero">
-    <h2>Seu controle fitness diário</h2>
-    <p>
-      Registre alimentação, água, peso e treinos em um só lugar.
-    </p>
-  </div>
-
-  <div class="calorie-ring-card">
-    <div class="calorie-ring" id="calorieRing">
-      <div class="ring-inner">
-        <span>Calorias</span>
-        <strong id="ringCalories">0</strong>
-        <small id="ringGoal">meta -- kcal</small>
+      <div class="grid">
+        <div class="card stat"><span>Calorias hoje</span><strong id="totalCalories">0 kcal</strong></div>
+        <div class="card stat"><span>Meta calórica</span><strong id="calorieGoal">-- kcal</strong></div>
+        <div class="card stat"><span>Água hoje</span><strong id="totalWater">0 ml</strong></div>
+        <div class="card stat"><span>Meta de água</span><strong id="waterGoalText">-- ml</strong></div>
+        <div class="card stat"><span>Peso atual</span><strong id="currentWeight">-- kg</strong></div>
+        <div class="card stat"><span>Peso objetivo</span><strong id="goalWeightText">-- kg</strong></div>
+        <div class="card stat"><span>Treinos hoje</span><strong id="totalWorkouts">0</strong></div>
+        <div class="card stat"><span>TMB</span><strong id="tmbText">--</strong></div>
       </div>
-    </div>
+    </section>
 
-    <div class="ring-info">
-      <h3>Resumo do dia</h3>
-      <p id="calorieStatus">
-        Defina seu perfil para calcular sua meta.
-      </p>
-    </div>
-  </div>
+    <section id="screen-people" class="screen">
+      <div class="card page-card">
+        <h2>Pessoas</h2>
+        <p class="muted">Escolha quem está usando o Projeto Dieta.</p>
 
-  <div class="grid">
+        <select id="profileSelect">
+          <option value="">Escolher perfil</option>
+          <option value="Gabriel">Gabriel</option>
+          <option value="Raissa">Raissa</option>
+        </select>
 
-    <div class="card stat">
-      <span>Calorias hoje</span>
-      <strong id="totalCalories">0 kcal</strong>
-    </div>
+        <p class="active-person">
+          Perfil ativo: <strong id="activeProfile">Nenhum</strong>
+        </p>
+      </div>
+    </section>
 
-    <div class="card stat">
-      <span>Meta calórica</span>
-      <strong id="calorieGoal">-- kcal</strong>
-    </div>
+    <section id="screen-add-food" class="screen">
+      <div class="card page-card">
+        <h2>Adicionar alimento</h2>
+        <p class="muted">Em breve: busca de alimentos, quantidade, refeição e cálculo automático.</p>
 
-    <div class="card stat">
-      <span>Água hoje</span>
-      <strong id="totalWater">0 ml</strong>
-    </div>
+        <input id="foodName" type="text" placeholder="Alimento" />
+        <input id="foodCalories" type="number" placeholder="Calorias" />
+        <button id="addFoodBtn">Adicionar alimento</button>
+      </div>
+    </section>
 
-    <div class="card stat">
-      <span>Meta de água</span>
-      <strong id="waterGoalText">-- ml</strong>
-    </div>
+    <section id="screen-meals" class="screen">
+      <div class="card page-card">
+        <h2>Refeições do dia</h2>
+        <p class="muted">Aqui ficarão Café da Manhã, Almoço, Pré-treino, Jantar e Ceia.</p>
+      </div>
+    </section>
 
-    <div class="card stat">
-      <span>Peso atual</span>
-      <strong id="currentWeight">-- kg</strong>
-    </div>
+    <section id="screen-calendar" class="screen">
+      <div class="card page-card">
+        <h2>Calendário</h2>
+        <p class="muted">Aqui entraremos com o calendário colorido estilo FatSecret.</p>
+      </div>
+    </section>
 
-    <div class="card stat">
-      <span>Peso objetivo</span>
-      <strong id="goalWeightText">-- kg</strong>
-    </div>
+    <section id="screen-history" class="screen">
+      <div class="card page-card">
+        <h2>Histórico</h2>
+        <div id="historyList"></div>
+      </div>
+    </section>
 
-    <div class="card stat">
-      <span>Treinos hoje</span>
-      <strong id="totalWorkouts">0</strong>
-    </div>
+    <section id="screen-weight" class="screen">
+      <div class="card page-card">
+        <h2>Peso e medidas</h2>
+        <input id="weightInput" type="number" step="0.1" placeholder="Peso em kg" />
+        <button id="addWeightBtn">Registrar peso</button>
+      </div>
+    </section>
 
-    <div class="card stat">
-      <span>TMB</span>
-      <strong id="tmbText">--</strong>
-    </div>
+    <section id="screen-settings" class="screen">
+      <div class="card page-card">
+        <h2>Configurações</h2>
 
-  </div>
-
-</section>
-    <section class="content">
-      <div class="card">
         <h3>Perfil</h3>
-
         <input id="profileName" type="text" placeholder="Nome" />
 
         <select id="profileSex">
@@ -162,28 +184,13 @@
         <input id="waterGoalInput" type="number" placeholder="Meta de água em ml" value="2500" />
 
         <button id="saveProfileBtn">Salvar perfil</button>
-      </div>
 
-      <div class="card">
-        <h3>Diário alimentar</h3>
-        <input id="foodName" type="text" placeholder="Alimento" />
-        <input id="foodCalories" type="number" placeholder="Calorias" />
-        <button id="addFoodBtn">Adicionar alimento</button>
-      </div>
+        <hr />
 
-      <div class="card">
         <h3>Água</h3>
         <input id="waterAmount" type="number" placeholder="Quantidade em ml" value="250" />
         <button id="addWaterBtn">Registrar água</button>
-      </div>
 
-      <div class="card">
-        <h3>Peso</h3>
-        <input id="weightInput" type="number" step="0.1" placeholder="Peso em kg" />
-        <button id="addWeightBtn">Registrar peso</button>
-      </div>
-
-      <div class="card">
         <h3>Treinos</h3>
         <select id="workoutType">
           <option value="Musculação">Musculação</option>
@@ -192,16 +199,14 @@
           <option value="Corrida">Corrida</option>
           <option value="Bicicleta">Bicicleta</option>
         </select>
+
         <input id="workoutMinutes" type="number" placeholder="Minutos" />
         <button id="addWorkoutBtn">Registrar treino</button>
       </div>
     </section>
 
-    <section class="card history-card">
-      <h3>Histórico</h3>
-      <div id="historyList"></div>
-    </section>
-  </main>
+  </section>
+</main>
 
   <script type="module" src="script.js"></script>
 </body>
