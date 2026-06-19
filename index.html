@@ -51,68 +51,90 @@
 
       <button id="logoutBtn" class="danger">Sair</button>
     </header>
-    <section class="card" id="profileSelector">
-    <h3>Quem está usando?</h3>
+    <section class="profile-bar">
+  <div>
+    <span class="mini-label">Perfil ativo</span>
+    <strong id="activeProfile">Nenhum</strong>
+  </div>
 
-    <button id="gabrielBtn">👨 Gabriel</button>
+  <select id="profileSelect">
+    <option value="">Escolher perfil</option>
+    <option value="Gabriel">Gabriel</option>
+    <option value="Raissa">Raissa</option>
+  </select>
+</section>
 
-    <button id="raissaBtn">👩 Raissa</button>
+<section class="dashboard">
 
+  <div class="hero">
+    <h2>Seu controle fitness diário</h2>
     <p>
-      Perfil ativo:
-      <strong id="activeProfile">Nenhum</strong>
+      Registre alimentação, água, peso e treinos em um só lugar.
     </p>
-  </section>
+  </div>
 
-    <section class="dashboard">
-      <div class="hero">
-        <h2>Seu controle fitness diário</h2>
-        <p>Registre alimentação, água, peso e treinos em um só lugar.</p>
+  <div class="calorie-ring-card">
+    <div class="calorie-ring" id="calorieRing">
+      <div class="ring-inner">
+        <span>Calorias</span>
+        <strong id="ringCalories">0</strong>
+        <small id="ringGoal">meta -- kcal</small>
       </div>
+    </div>
 
-      <div class="grid">
-        <div class="card stat">
-          <span>Calorias hoje</span>
-          <strong id="totalCalories">0 kcal</strong>
-        </div>
+    <div class="ring-info">
+      <h3>Resumo do dia</h3>
+      <p id="calorieStatus">
+        Defina seu perfil para calcular sua meta.
+      </p>
+    </div>
+  </div>
 
-        <div class="card stat">
-          <span>Meta calórica</span>
-          <strong id="calorieGoal">-- kcal</strong>
-        </div>
+  <div class="grid">
 
-        <div class="card stat">
-          <span>Água hoje</span>
-          <strong id="totalWater">0 ml</strong>
-        </div>
+    <div class="card stat">
+      <span>Calorias hoje</span>
+      <strong id="totalCalories">0 kcal</strong>
+    </div>
 
-        <div class="card stat">
-          <span>Meta de água</span>
-          <strong id="waterGoalText">-- ml</strong>
-        </div>
+    <div class="card stat">
+      <span>Meta calórica</span>
+      <strong id="calorieGoal">-- kcal</strong>
+    </div>
 
-        <div class="card stat">
-          <span>Peso atual</span>
-          <strong id="currentWeight">-- kg</strong>
-        </div>
+    <div class="card stat">
+      <span>Água hoje</span>
+      <strong id="totalWater">0 ml</strong>
+    </div>
 
-        <div class="card stat">
-          <span>Peso objetivo</span>
-          <strong id="goalWeightText">-- kg</strong>
-        </div>
+    <div class="card stat">
+      <span>Meta de água</span>
+      <strong id="waterGoalText">-- ml</strong>
+    </div>
 
-        <div class="card stat">
-          <span>Treinos hoje</span>
-          <strong id="totalWorkouts">0</strong>
-        </div>
+    <div class="card stat">
+      <span>Peso atual</span>
+      <strong id="currentWeight">-- kg</strong>
+    </div>
 
-        <div class="card stat">
-          <span>TMB</span>
-          <strong id="tmbText">--</strong>
-        </div>
-      </div>
-    </section>
+    <div class="card stat">
+      <span>Peso objetivo</span>
+      <strong id="goalWeightText">-- kg</strong>
+    </div>
 
+    <div class="card stat">
+      <span>Treinos hoje</span>
+      <strong id="totalWorkouts">0</strong>
+    </div>
+
+    <div class="card stat">
+      <span>TMB</span>
+      <strong id="tmbText">--</strong>
+    </div>
+
+  </div>
+
+</section>
     <section class="content">
       <div class="card">
         <h3>Perfil</h3>
