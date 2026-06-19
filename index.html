@@ -113,67 +113,112 @@
     </section>
 
     <section id="screen-people" class="screen">
-      <div class="card page-card">
-        <h2>Pessoas</h2>
-        <p class="muted">Escolha quem está usando o Projeto Dieta.</p>
 
-        <select id="profileSelect">
-          <option value="">Escolher perfil</option>
-          <option value="Gabriel">Gabriel</option>
-          <option value="Raissa">Raissa</option>
-        </select>
+  <div class="page-header">
+    <div class="page-icon">👤</div>
+    <h2>Pessoas</h2>
+    <p>Gerencie os perfis do Projeto Dieta.</p>
+  </div>
 
-        <p class="active-person">
-          Perfil ativo: <strong id="activeProfile">Nenhum</strong>
-        </p>
-      </div>
+  <div class="profile-context">
+    <span>PERFIL ATIVO</span>
+    <strong class="currentProfileLabel">Nenhum</strong>
+    <small class="currentDateLabel"></small>
+  </div>
     </section>
 
     <section id="screen-add-food" class="screen">
-      <div class="card page-card">
-        <h2>Adicionar alimento</h2>
-        <p class="muted">Em breve: busca de alimentos, quantidade, refeição e cálculo automático.</p>
 
-        <input id="foodName" type="text" placeholder="Alimento" />
-        <input id="foodCalories" type="number" placeholder="Calorias" />
-        <button id="addFoodBtn">Adicionar alimento</button>
-      </div>
+  <div class="page-header">
+    <div class="page-icon">🍎</div>
+    <h2>Adicionar alimento</h2>
+    <p>Monte sua refeição e acompanhe seus macros.</p>
+  </div>
+
+  <div class="profile-context">
+    <span>ADICIONANDO ALIMENTO PARA</span>
+    <strong class="currentProfileLabel">Nenhum</strong>
+    <small class="currentDateLabel"></small>
+  </div>
     </section>
 
     <section id="screen-meals" class="screen">
-      <div class="card page-card">
-        <h2>Refeições do dia</h2>
-        <p class="muted">Aqui ficarão Café da Manhã, Almoço, Pré-treino, Jantar e Ceia.</p>
-      </div>
+
+  <div class="page-header">
+    <div class="page-icon">🍽️</div>
+    <h2>Refeições do dia</h2>
+    <p>Veja tudo que foi consumido no dia selecionado.</p>
+  </div>
+
+  <div class="profile-context">
+    <span>REFEIÇÕES DE</span>
+    <strong class="currentProfileLabel">Nenhum</strong>
+    <small class="currentDateLabel"></small>
+  </div>
     </section>
 
     <section id="screen-calendar" class="screen">
-      <div class="card page-card">
-        <h2>Calendário</h2>
-        <p class="muted">Aqui entraremos com o calendário colorido estilo FatSecret.</p>
-      </div>
+
+  <div class="page-header">
+    <div class="page-icon">📅</div>
+    <h2>Calendário</h2>
+    <p>Acompanhe seus dias de dieta, treino e evolução.</p>
+  </div>
+
+  <div class="profile-context">
+    <span>CALENDÁRIO DE</span>
+    <strong class="currentProfileLabel">Nenhum</strong>
+    <small class="currentDateLabel"></small>
+  </div>
     </section>
 
     <section id="screen-history" class="screen">
-      <div class="card page-card">
-        <h2>Histórico</h2>
-        <div id="historyList"></div>
-      </div>
+
+  <div class="page-header">
+    <div class="page-icon">📈</div>
+    <h2>Histórico</h2>
+    <p>Veja todos os registros salvos anteriormente.</p>
+  </div>
+
+  <div class="profile-context">
+    <span>HISTÓRICO DE</span>
+    <strong class="currentProfileLabel">Nenhum</strong>
+    <small class="currentDateLabel"></small>
+  </div>
     </section>
 
     <section id="screen-weight" class="screen">
-      <div class="card page-card">
-        <h2>Peso e medidas</h2>
-        <input id="weightInput" type="number" step="0.1" placeholder="Peso em kg" />
-        <button id="addWeightBtn">Registrar peso</button>
-      </div>
+
+  <div class="page-header">
+    <div class="page-icon">⚖️</div>
+    <h2>Peso e medidas</h2>
+    <p>Acompanhe sua evolução física.</p>
+  </div>
+
+  <div class="profile-context">
+    <span>DADOS DE</span>
+    <strong class="currentProfileLabel">Nenhum</strong>
+    <small class="currentDateLabel"></small>
+  </div>
     </section>
 
     <section id="screen-settings" class="screen">
-      <div class="card page-card">
-        <h2>Configurações</h2>
 
-        <h3>Perfil</h3>
+  <div class="page-header">
+    <div class="page-icon">⚙️</div>
+    <h2>Configurações</h2>
+    <p>Defina metas, dados físicos e preferências do perfil.</p>
+  </div>
+
+  <div class="profile-context">
+    <span>CONFIGURAÇÕES DE</span>
+    <strong class="currentProfileLabel">Nenhum</strong>
+    <small class="currentDateLabel"></small>
+  </div>
+
+  <div class="card page-card">
+
+    <h3>Perfil</h3>
         <input id="profileName" type="text" placeholder="Nome" />
 
         <select id="profileSex">
